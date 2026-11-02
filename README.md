@@ -1,10 +1,10 @@
 # seek_thermal_ros2
 
-ROS 2 packages for interfacing with Seek Thermal cameras (e.g., Seek Thermal CompactPRO / PIR324 and Compact) using the open-source `libseek-thermal` library.
+ROS 2 packages for interfacing with Seek Thermal cameras (e.g., Seek Thermal CompactPRO / PIR324 and Compact) using the open-source `libseek-thermal` library, which is vendored directly into the driver package.
 
 ## Packages
 
-- **[`seek_thermal_driver`](seek_thermal_driver/)**: Core C++ driver node that connects to an attached Seek Thermal camera, handles disconnect/reconnect cycles, and publishes thermal images as ROS 2 `sensor_msgs/msg/Image` (`mono16`) topics.
+- **[`seek_thermal_driver`](seek_thermal_driver/)**: Core C++ driver node that connects to an attached Seek Thermal camera, handles disconnect/reconnect cycles, and publishes thermal images as ROS 2 `sensor_msgs/msg/Image` (`mono16`) topics. The `libseek-thermal` sources are bundled under `seek_thermal_driver/src/libseek` and built as part of this package.
 - **[`seek_thermal_bringup`](seek_thermal_bringup/)**: Launch package providing [`bringup.launch.py`](seek_thermal_bringup/launch/bringup.launch.py) for starting and configuring the driver with integrated namespacing and parameters.
 
 ## Prerequisites
@@ -21,21 +21,7 @@ Ensure your system is up to date and install the following:
 sudo apt install build-essential cmake libusb-1.0-0-dev libopencv-dev ros-$ROS_DISTRO-cv-bridge
 ```
 
-### 2. Install `libseek-thermal`
-
-Install the `libseek-thermal` driver library from source before building the ROS 2 packages (`https://github.com/OpenThermal/libseek-thermal`):
-
-```bash
-git clone https://github.com/OpenThermal/libseek-thermal.git
-cd libseek-thermal
-mkdir build && cd build
-cmake ..
-make
-sudo make install
-sudo ldconfig
-```
-
-### 3. USB Permissions (Udev Rules)
+### 2. USB Permissions (Udev Rules)
 
 To access the camera without root/sudo, create `/etc/udev/rules.d/99-seekthermal.rules` with:
 
