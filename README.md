@@ -89,4 +89,4 @@ ros2 launch seek_thermal_bringup bringup.launch.py
 
 ## License
 
-This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
+This project is licensed under the BSD-3-Clause License. See [LICENSE](LICENSE) for details.
